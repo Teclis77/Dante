@@ -1,0 +1,4 @@
+This directory contains files for the XGL Dante.  
+They were copied from the latest distribution: "DANTE-2.0.8.9 HR.zip" on November 20, 2023.
+They get installed before the DanteSrc directory is built on Linux and Windows.
+

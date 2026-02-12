@@ -1,0 +1,16 @@
+$(P)$(R)CollectMode
+$(P)$(R)GatingMode
+$(P)$(R)PollTime
+$(P)$(R)ReadAll.SCAN
+$(P)$(R)NumMCAChannels
+$(P)$(R)PresetReal
+$(P)$(R)MappingPoints
+$(P)$(R)ListBufferSize
+$(P)$(R)TraceTime
+$(P)$(R)TraceTriggerInstant
+$(P)$(R)TraceTriggerRising
+$(P)$(R)TraceTriggerFalling
+$(P)$(R)TraceTriggerLevel
+$(P)$(R)TraceTriggerWait
+$(P)$(R)TraceLength
+file "NDArrayBase_settings.req", P=$(P), R=$(R)
