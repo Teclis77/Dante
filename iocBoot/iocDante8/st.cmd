@@ -20,6 +20,8 @@ epicsEnvSet ("EPICS_DB_INCLUDE_PATH", "$(ADCORE)/db")
 
 # Prefix for all records
 epicsEnvSet("PREFIX", "Dante:")
+# Prefix for Single channel
+epicsEnvSet("PREFIX_CH", "dante1:")
 # The port name for the detector
 epicsEnvSet("PORT",   "DANTE1")
 # The queue size for all plugins
@@ -69,11 +71,13 @@ asynSetTraceMask($(PORT),0,ERROR|WARNING)
 iocInit
 
 #seq danteMED "P=$(PREFIX), DANTE=dante, MCA=mca, N_DETECTORS=8")
-seq danteMED "P=$(PREFIX), DANTE=dante, MCA=mca, N_DETECTORS=3")
+#seq danteMED "P=$(PREFIX), DANTE=dante, MCA=mca, N_DETECTORS=3")
+seq danteMED "P=$(PREFIX), DANTE=dante, MCA=mca, N_DETECTORS=3"
 
 ### Start up the autosave task and tell it what to do.
 # Save settings every thirty seconds
-create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante:, M=mca1")
+#create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante:, M=mca1")
+#create_monitor_set("auto_settings.req", 30, "P=$(PREFIX), R=dante:, M=mca2")
 
 # Wait 5 seconds for all records with PINI=YES to process
 epicsThreadSleep(5)
@@ -89,3 +93,44 @@ dbpf("$(PREFIX)dante:GatingMode.PROC", "1")
 
 # Fix the MCA CHannels to 4096
 dbpf("$(PREFIX)dante:NumMCAChannels", "4096")
+# Increase the Poll Time
+dbpf("$(PREFIX)dante:PollTime", "0.02")
+epicsThreadSleep(0.2)
+
+# Parametri custom dante1
+dbpf("$(PREFIX)$(PREFIX_CH)FastPeakingTime","0.096")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)FastThreshold","1.52")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)FastFlatTopTime","0.01")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)PeakingTime","2.976")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)MaxPeakingTime","0")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)FlatTopTime","0.05")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)EnergyThreshold","0.85")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)BaselineThreshold","0.85")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)MaxRiseTime","0.244")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)ResetRecoveryTime","2.4")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)ZeroPeakFreq	","10000")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)BaselineSamples","70")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)Gain","1")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)AnalogOffset","100")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)BaseOffset","70")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)ResetThreshold","1000")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)TimeConstant","0")
+epicsThreadSleep(0.2)
+dbpf("$(PREFIX)$(PREFIX_CH)MaxEnergy","50")
+epicsThreadSleep(0.2)
